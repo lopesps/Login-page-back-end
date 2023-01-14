@@ -1,9 +1,13 @@
 import express from "express";
 import router from "./src/routes/routes.js";
 import mongoose from "mongoose";
+import cors from "cors";
 
 const app = express();
 const PORT = 3000;
+
+app.use(cors());
+app.use(express.json());
 
 //mongoose connection
 mongoose.connect(
@@ -18,7 +22,6 @@ mongoose.connect(
   }
 );
 
-app.use(express.json());
 //serving static files
 app.use(express.static("public"));
 app.use(router);
