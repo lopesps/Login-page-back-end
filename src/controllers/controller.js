@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { UserSchema } from "../models/model.js";
 import bcrypt from "bcrypt";
+import axios from "axios";
 import Auth from "../middlewares/Auth.js";
 
 const User = mongoose.model("User", UserSchema);
@@ -88,4 +89,13 @@ export const deleteUser = (req, res) => {
     }
     res.json({ message: "User deleted!" });
   });
+};
+
+export const getCats = async (req, res) => {
+  await axios
+    .get("https://http.cat/200" + req.params.catCode)
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => console.log(err));
 };
